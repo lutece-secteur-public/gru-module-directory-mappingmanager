@@ -1,0 +1,67 @@
+<#include "manage_directory_mappingmanager_tab.html" />
+<@tabs tab="notifygrumappingmanager" />
+
+<@rowBoxHeader i18nTitleKey="module.directory.mappingmanager.modify_notifygrumappingmanager.pageTitle">
+    <form class="form-horizontal" method="post" name="modify_notifygrumappingmanager" action="jsp/admin/plugins/directory/modules/mappingmanager/DirectoryMappingManagers.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id" value="${mappingmanager.id}"/>
+        
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelBeanKey" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelBeanKey.help"
+                        inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>                        
+<@comboSiteWithParams name="beankey"   default_value="${mappingmanager.beanKey}"   additionalParameters='id="beankey"  '  items=list_provider    />
+</@fieldInputWrapper>
+          
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelGuid" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelGuid.help"
+                        inputName="guid"   mandatory=true   value=""  cssClass='form-control'>                        
+<@comboSiteWithParams name="guid"   default_value="${mappingmanager.guid!}"   additionalParameters='id="guid"'  items=list_position    />
+</@fieldInputWrapper>
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelReferenceDemand" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelReferenceDemand.help"
+                        inputName="referencedemand"   mandatory=true   value=""  cssClass='form-control'>                        
+<@comboSiteWithParams name="referencedemand"   default_value="${mappingmanager.referenceDemand!}"   additionalParameters='id="referencedemand"'  items=list_position    />
+</@fieldInputWrapper>
+
+
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid.help"
+                        inputName="cuid"   mandatory=true   value="0"  cssClass='form-control'>                        
+<@comboSiteWithParams name="cuid"   default_value="${mappingmanager.customerId!}"   additionalParameters='id="cuid"'  items=list_position    />
+</@fieldInputWrapper>
+
+          
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber.help"
+                        inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>                        
+<@comboSiteWithParams name="mobilephonenumber"   default_value="${mappingmanager.mobilePhoneNumber!}"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+</@fieldInputWrapper>
+
+
+
+
+                 
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help"
+                        inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="fixedphonenumber"   default_value="${mappingmanager.fixedPhoneNumber!}"   additionalParameters='id="fixedphonenumber"'  items=list_position    />
+</@fieldInputWrapper>
+
+
+ 
+
+                        
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelEmail" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelEmail.help"
+                        inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="email"   default_value="${mappingmanager.email!}"   additionalParameters='id="email"'  items=list_position    />
+</@fieldInputWrapper>
+  
+      
+      
+      
+        <@actionButtons button1Name="action_modifyNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
+    </form>
+</@rowBoxHeader>

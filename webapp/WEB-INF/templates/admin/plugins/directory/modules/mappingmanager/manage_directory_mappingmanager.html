@@ -1,0 +1,75 @@
+<#include "manage_directory_mappingmanager_tab.html" />
+<@tabs tab="notifygrumappingmanager" />
+
+<@rowBox>
+    <@boxHeader i18nTitleKey="mappingmanager.manage_notifygrumappingmanagers.tableLabel">
+        <@headerButtons>
+
+        
+        <form class="form-inline pull-right" method="post" name="manage_notifygrumappingmanagers" action="jsp/admin/plugins/directory/modules/mappingmanager/DirectoryMappingManagers.jsp">
+            <!-- Add pull-right to class1 -->
+            <@actionButtons button1Name="view_createNotifygruMappingManager" icon1="icon-plus icon-white" i18nValue1Key="module.directory.mappingmanager.manage_notifygrumappingmanagers.buttonAdd" />
+        </form>
+        
+    </@headerButtons>
+    </@boxHeader>
+    <@boxBody>    
+    <@messages infos=infos />
+    <@paginationAdmin paginator=paginator combo=1 />
+    
+    <@table>
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnBeanKey}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnGuid}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnReferenceDemand}</th>   
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnCuid}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnMobilePhoneNumber}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnFixedPhoneNumber}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnEmail}</th>
+            <th>#i18n{portal.util.labelActions}</th>
+        </tr>
+        <@tableHeadBodySeparator />
+            <#list mappingmanager_list as notifygrumappingmanager >
+        <tr>
+            <input type="hidden" id="id" name="id"/>
+            <td>
+                ${notifygrumappingmanager.beanKey!}
+            </td>
+             <td>
+                ${notifygrumappingmanager.guid!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.referenceDemand!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.customerId!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.mobilePhoneNumber!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.fixedPhoneNumber!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.email!}
+            </td>
+        <td>
+            <a href="jsp/admin/plugins/directory/modules/mappingmanager/DirectoryMappingManagers.jsp?view=modifyNotifygruMappingManager&id=${notifygrumappingmanager.id}"
+               class="btn btn-primary btn-sm" title="#i18n{portal.util.labelModify}">
+                <i class="fa fa-pencil"></i>
+            </a>
+
+            <a href="jsp/admin/plugins/directory/modules/mappingmanager/DirectoryMappingManagers.jsp?action=confirmRemoveNotifygruMappingManager&id=${notifygrumappingmanager.id}"
+               class="btn btn-danger btn-sm" title="#i18n{portal.util.labelDelete}" >
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+        </tr>
+        </#list>
+    </@table>
+
+    <@paginationAdmin paginator=paginator />
+
+  </@boxBody>
+</@rowBox>

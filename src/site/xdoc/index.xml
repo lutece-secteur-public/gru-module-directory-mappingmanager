@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Module Directory Mappingmanager</title>
+	</properties>
+	<body>
+		<section name="Module Directory Mappingmanager">
+			<subsection name="Introduction">
+				<p>
+					This module is used to mapping entry with notify gru.
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>

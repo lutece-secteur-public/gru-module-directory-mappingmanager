@@ -1,0 +1,150 @@
+<#include "manage_directory_mappingmanager_tab.html" />
+<@tabs tab="notifygrumappingmanager" />
+
+<@rowBoxHeader i18nTitleKey="module.directory.mappingmanager.create_notifygrumappingmanager.pageTitle">
+    <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/directory/modules/mappingmanager/DirectoryMappingManagers.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+    
+    
+
+
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelBeanKey" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
+                        inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="beankey"   default_value="1"   additionalParameters='id="beankey" onChange="loadForm()"  '  items=list_provider    />
+</@fieldInputWrapper>
+          
+          
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelGuid" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.create_notifygrumappingmanager.labelGuid.help"
+                        inputName="guid"   mandatory=true   value=""  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="guid"   default_value=""   additionalParameters='id="guid"'  items=list_position    />
+</@fieldInputWrapper>  
+
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelReferenceDemand" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.create_notifygrumappingmanager.labelReferenceDemand.help"
+                        inputName="referencedemand"   mandatory=true   value=""  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="referencedemand"   default_value=""   additionalParameters='id="referencedemand"'  items=list_position    />
+</@fieldInputWrapper>  
+
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelCuid" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.create_notifygrumappingmanager.labelCuid.help"
+                        inputName="cuid"   mandatory=true   value=""  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="cuid"   default_value="0"   additionalParameters='id="cuid"'  items=list_position    />
+</@fieldInputWrapper>   
+  
+  
+         
+          
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber.help"
+                        inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+</@fieldInputWrapper>
+
+    
+       
+                 
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber" 
+                        i18nHelpBlockKey ="module.directory.mappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber.help"
+                        inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
+</@fieldInputWrapper>
+
+       
+    
+                        
+<@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.create_notifygrumappingmanager.labelEmail" 
+                        i18nHelpBlockKey ="mappingmanager.create_notifygrumappingmanager.labelEmail.help"
+                        inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="email"   default_value="1"   additionalParameters='id="email"'  items=list_position    />
+</@fieldInputWrapper>
+  
+        
+        
+   
+      
+      
+      
+        <@actionButtons button1Name="action_createNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
+    </form>
+</@rowBoxHeader>
+
+
+<script type="text/javascript">
+
+
+
+
+
+window.onload =  loadForm();
+	
+	
+	function loadForm()
+{
+
+	var strkey = $('#beankey').val()
+	
+//console.log("${BASE_URL}")
+
+    $.ajax({
+          type: 'POST',
+          url: '${BASE_URL}rest/directorymappingmanager/notifygrumappingmanager',
+          headers: {              
+              'Content-Type':'application/json'
+          },
+          dataType: 'json',
+          data: {"${AJAX_KEY}": strkey},
+          timeout: 20000,
+          success: function (data) {
+
+
+    var form = (data.form!==undefined) ? data.form:{};
+    var formValue = (data.formValue!==undefined) ? data.formValue:{};
+    
+  var OptionForm="";
+    $.each(form,function(position,title){
+    	
+    	OptionForm+="<option value="+position+"> "+title+" </option>";
+    });
+
+    
+    $("#mobilephonenumber").html(OptionForm);
+    $("#fixedphonenumber").html(OptionForm);
+    $("#email").html(OptionForm);
+    $("#guid").html(OptionForm);
+    $("#cuid").html(OptionForm);
+    $("#referencedemand").html(OptionForm);
+    
+   $.each(formValue,function(title,position){
+    	
+    	$("#"+title).val(position);
+    });
+    
+          },
+          error: function (request) {
+
+    
+console.log("errror du webservidse")
+          }
+
+
+
+
+
+      });  
+	
+
+
+}
+	
+	
+</script>
