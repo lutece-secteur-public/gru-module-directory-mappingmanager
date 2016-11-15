@@ -78,11 +78,11 @@ public class DirectoryMappingManagerService
     public static ReferenceList getListEntryOfProvider( String strKey )
     {
         ReferenceList refenreceList = new ReferenceList(  );
-        refenreceList.addItem( -1, PARAM_MAPING_NONE );
+        refenreceList.addItem( 0, PARAM_MAPING_NONE );
 
-        if ( ServiceConfigTaskForm.isBeanExiste( strKey ) )
+        if ( ServiceConfigTaskForm.isBeanExists( strKey ) )
         {
-            AbstractServiceProvider provider = ServiceConfigTaskForm.getCostumizeBean( strKey );
+            AbstractServiceProvider provider = ServiceConfigTaskForm.getCustomizedBean( strKey );
             refenreceList.addAll( ( (NotifyGruDirectoryManager) provider ).getReferenteListEntityProvider(  ) );
         }
 

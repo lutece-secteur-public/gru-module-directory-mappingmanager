@@ -286,9 +286,9 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
         ReferenceList listPosition = new ReferenceList(  );
 
         if ( ( _directorymappingmanager != null ) &&
-                ServiceConfigTaskForm.isBeanExiste( _directorymappingmanager.getBeanKey(  ) ) )
+                ServiceConfigTaskForm.isBeanExists( _directorymappingmanager.getBeanKey(  ) ) )
         {
-            AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCostumizeBean( _directorymappingmanager.getBeanKey(  ) );
+            AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCustomizedBean( _directorymappingmanager.getBeanKey(  ) );
 
             if ( ( _notifyGruService != null ) && _notifyGruService.isManagerProvider(  ) )
             {
