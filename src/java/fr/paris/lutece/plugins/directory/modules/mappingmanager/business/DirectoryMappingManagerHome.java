@@ -39,28 +39,28 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 import java.util.List;
 
-
 /**
  * This class provides instances management methods (create, find, ...) for DirectoryMappingManagerHome objects
  */
 public final class DirectoryMappingManagerHome
 {
     // Static variable pointed at the DAO instance
-    private static IDirectoryMappingManagerDAO _dao = SpringContextService.getBean( 
-            "directory-mappingmanager.directoryMappingManagerDAO" );
+    private static IDirectoryMappingManagerDAO _dao = SpringContextService.getBean( "directory-mappingmanager.directoryMappingManagerDAO" );
     private static Plugin _plugin = PluginService.getPlugin( "directory-mappingmanager" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private DirectoryMappingManagerHome(  )
+    private DirectoryMappingManagerHome( )
     {
     }
 
     /**
      * Create an instance of the DirectoryMappingManager class
-     * @param directoryMappingManager The instance of the DirectoryMappingManager which contains the informations to store
-     * @return The  instance of DirectoryMappingManager which has been created with its primary key.
+     * 
+     * @param directoryMappingManager
+     *            The instance of the DirectoryMappingManager which contains the informations to store
+     * @return The instance of DirectoryMappingManager which has been created with its primary key.
      */
     public static DirectoryMappingManager create( DirectoryMappingManager directoryMappingManager )
     {
@@ -71,8 +71,10 @@ public final class DirectoryMappingManagerHome
 
     /**
      * Update of the DirectoryMappingManager which is specified in parameter
-     * @param directoryMappingManager The instance of the NotifygruMappingManager which contains the data to store
-     * @return The instance of the  DirectoryMappingManager which has been updated
+     * 
+     * @param directoryMappingManager
+     *            The instance of the NotifygruMappingManager which contains the data to store
+     * @return The instance of the DirectoryMappingManager which has been updated
      */
     public static DirectoryMappingManager update( DirectoryMappingManager directoryMappingManager )
     {
@@ -83,19 +85,23 @@ public final class DirectoryMappingManagerHome
 
     /**
      * Remove the directoryMappingManager whose identifier is specified in parameter
-     * @param nKey The directoryMappingManager Id
+     * 
+     * @param nKey
+     *            The directoryMappingManager Id
      */
     public static void remove( int nKey )
     {
         _dao.delete( nKey, _plugin );
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Returns an instance of a directoryMappingManager whose identifier is specified in parameter
-     * @param nKey The directoryMappingManager primary key
+     * 
+     * @param nKey
+     *            The directoryMappingManager primary key
      * @return an instance of NotifygruMappingManager
      */
     public static DirectoryMappingManager findByPrimaryKey( int nKey )
@@ -110,18 +116,20 @@ public final class DirectoryMappingManagerHome
 
     /**
      * Load the data of all the directoryMappingManager objects and returns them in form of a collection
+     * 
      * @return the collection which contains the data of all the directoryMappingManager objects
      */
-    public static List<DirectoryMappingManager> getDirectoryMappingManagersList(  )
+    public static List<DirectoryMappingManager> getDirectoryMappingManagersList( )
     {
         return _dao.selectDirectoryMappingManagersList( _plugin );
     }
 
     /**
      * Load the id of all the DirectoryMappingManager objects and returns them in form of a collection
+     * 
      * @return the collection which contains the id of all the DirectoryMappingManager objects
      */
-    public static List<Integer> getIdDirectoryMappingManagersList(  )
+    public static List<Integer> getIdDirectoryMappingManagersList( )
     {
         return _dao.selectIdDirectoryMappingManagersList( _plugin );
     }

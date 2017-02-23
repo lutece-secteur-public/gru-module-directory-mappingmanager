@@ -39,7 +39,6 @@ import fr.paris.lutece.util.sql.DAOUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This class provides Data Access methods for DirectoryMappingManagerDAO objects
  */
@@ -57,22 +56,24 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
 
     /**
      * Generates a new primary key
-     * @param plugin The Plugin
+     * 
+     * @param plugin
+     *            The Plugin
      * @return The new primary key
      */
     public int newPrimaryKey( Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         int nKey = 1;
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             nKey = daoUtil.getInt( 1 ) + 1;
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return nKey;
     }
@@ -88,18 +89,18 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
         notifygruMappingManager.setId( newPrimaryKey( plugin ) );
 
         int nIndex = 1;
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getId(  ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
 
-        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail(  ) );
+        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -110,14 +111,14 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
         daoUtil.setInt( 1, nKey );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         DirectoryMappingManager notifygruMappingManager = null;
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             int nIndex = 1;
-            notifygruMappingManager = new DirectoryMappingManager(  );
+            notifygruMappingManager = new DirectoryMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
 
@@ -130,7 +131,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
             notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return notifygruMappingManager;
     }
@@ -143,14 +144,14 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_KEY, plugin );
         daoUtil.setString( 1, strKey );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         DirectoryMappingManager notifygruMappingManager = null;
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             int nIndex = 1;
-            notifygruMappingManager = new DirectoryMappingManager(  );
+            notifygruMappingManager = new DirectoryMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
             notifygruMappingManager.setGuid( daoUtil.getInt( nIndex++ ) );
@@ -161,7 +162,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
             notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return notifygruMappingManager;
     }
@@ -174,8 +175,8 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
         daoUtil.setInt( 1, nKey );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -187,18 +188,18 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
         int nIndex = 1;
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getId(  ) );
-        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber(  ) );
-        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail(  ) );
-        daoUtil.setInt( nIndex, notifygruMappingManager.getId(  ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
+        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
+        daoUtil.setInt( nIndex, notifygruMappingManager.getId( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -207,13 +208,13 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
     @Override
     public List<DirectoryMappingManager> selectDirectoryMappingManagersList( Plugin plugin )
     {
-        List<DirectoryMappingManager> notifygruMappingManagerList = new ArrayList<DirectoryMappingManager>(  );
+        List<DirectoryMappingManager> notifygruMappingManagerList = new ArrayList<DirectoryMappingManager>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            DirectoryMappingManager notifygruMappingManager = new DirectoryMappingManager(  );
+            DirectoryMappingManager notifygruMappingManager = new DirectoryMappingManager( );
             int nIndex = 1;
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
@@ -228,7 +229,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
             notifygruMappingManagerList.add( notifygruMappingManager );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return notifygruMappingManagerList;
     }
@@ -239,16 +240,16 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
     @Override
     public List<Integer> selectIdDirectoryMappingManagersList( Plugin plugin )
     {
-        List<Integer> notifygruMappingManagerList = new ArrayList<Integer>(  );
+        List<Integer> notifygruMappingManagerList = new ArrayList<Integer>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
             notifygruMappingManagerList.add( daoUtil.getInt( 1 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return notifygruMappingManagerList;
     }

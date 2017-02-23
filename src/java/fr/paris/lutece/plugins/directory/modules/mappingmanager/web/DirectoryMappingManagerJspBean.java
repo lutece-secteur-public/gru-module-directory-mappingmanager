@@ -54,7 +54,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class provides the user interface to manage NotifygruMappingManager features ( manage, create, modify, remove )
  */
@@ -65,7 +64,7 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
      * 
      */
     private static final long serialVersionUID = 1L;
-    ////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////////////
     // Constants
 
     // templates
@@ -122,7 +121,9 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
 
     /**
      * Build the Manage View
-     * @param request The HTTP request
+     * 
+     * @param request
+     *            The HTTP request
      * @return The page
      */
     @View( value = VIEW_MANAGE_NOTIFYGRUMAPPINGMANAGERS, defaultView = true )
@@ -130,51 +131,49 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     {
         _directorymappingmanager = null;
 
-        List<DirectoryMappingManager> listNotifygruMappingManagers = DirectoryMappingManagerHome.getDirectoryMappingManagersList(  );
-        Map<String, Object> model = getPaginatedListModel( request, MARK_NOTIFYGRUMAPPINGMANAGER_LIST,
-                listNotifygruMappingManagers, JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
+        List<DirectoryMappingManager> listNotifygruMappingManagers = DirectoryMappingManagerHome.getDirectoryMappingManagersList( );
+        Map<String, Object> model = getPaginatedListModel( request, MARK_NOTIFYGRUMAPPINGMANAGER_LIST, listNotifygruMappingManagers,
+                JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
 
-        return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS,
-            model );
+        return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, model );
     }
 
     /**
      * Returns the form to create a directorymappingmanager
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the html code of the directorymappingmanager form
      */
     @View( VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER )
     public String getCreateNotifygruMappingManager( HttpServletRequest request )
     {
-        _directorymappingmanager = ( _directorymappingmanager != null ) ? _directorymappingmanager
-                                                                        : new DirectoryMappingManager(  );
+        _directorymappingmanager = ( _directorymappingmanager != null ) ? _directorymappingmanager : new DirectoryMappingManager( );
 
-        Map<String, Object> model = getModel(  );
+        Map<String, Object> model = getModel( );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _directorymappingmanager );
-        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, DirectoryMappingManagerService.getListProviders(  ) );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, DirectoryMappingManagerService.getListProviders( ) );
 
         UrlItem url = new UrlItem( AppPathService.getBaseUrl( request ) );
 
-        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, new ReferenceList(  ) );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, new ReferenceList( ) );
         model.put( MARK_BASE_URL, url );
         model.put( MARK_KEY_AJAX, Constants.KEY_BEAN );
 
-        return getPage( PROPERTY_PAGE_TITLE_CREATE_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_CREATE_NOTIFYGRUMAPPINGMANAGER,
-            model );
+        return getPage( PROPERTY_PAGE_TITLE_CREATE_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_CREATE_NOTIFYGRUMAPPINGMANAGER, model );
     }
 
     /**
      * Process the data capture form of a new directorymappingmanager
      *
-     * @param request The Http Request
+     * @param request
+     *            The Http Request
      * @return The Jsp URL of the process result
      */
     @Action( ACTION_CREATE_NOTIFYGRUMAPPINGMANAGER )
     public String doCreateNotifygruMappingManager( HttpServletRequest request )
     {
-        _directorymappingmanager = ( _directorymappingmanager != null ) ? _directorymappingmanager
-                                                                        : new DirectoryMappingManager(  );
+        _directorymappingmanager = ( _directorymappingmanager != null ) ? _directorymappingmanager : new DirectoryMappingManager( );
 
         populate( request );
 
@@ -184,15 +183,15 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
             return redirectView( request, VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER );
         }
 
-        if ( exitMapping(  ) )
+        if ( exitMapping( ) )
         {
-            addError( "modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.exist", getLocale(  ) );
+            addError( "modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.exist", getLocale( ) );
 
             return redirectView( request, VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER );
         }
 
         DirectoryMappingManagerHome.create( _directorymappingmanager );
-        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_CREATED, getLocale(  ) );
+        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_CREATED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
     }
@@ -204,28 +203,25 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
             int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
             _directorymappingmanager.setId( nId );
         }
-        catch ( NumberFormatException nfe )
+        catch( NumberFormatException nfe )
         {
             AppLogService.info( "insertion of mapping" );
         }
 
         _directorymappingmanager.setBeanKey( request.getParameter( PARAMS_REQUEST_BEAN_KEY ) );
         _directorymappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ) );
-        _directorymappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( 
-                    PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ) );
-        _directorymappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( 
-                    PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ) );
+        _directorymappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ) );
+        _directorymappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ) );
 
         _directorymappingmanager.setGuid( Integer.parseInt( request.getParameter( PARAMS_REQUEST_GUID ) ) );
-        _directorymappingmanager.setReferenceDemand( Integer.parseInt( request.getParameter( 
-                    PARAMS_REQUEST_REFERENCE_DEMAND ) ) );
+        _directorymappingmanager.setReferenceDemand( Integer.parseInt( request.getParameter( PARAMS_REQUEST_REFERENCE_DEMAND ) ) );
         _directorymappingmanager.setCustomerId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_CUID ) ) );
     }
 
-    private Boolean exitMapping(  )
+    private Boolean exitMapping( )
     {
-        //not dublicate
-        if ( DirectoryMappingManagerHome.findByPrimaryKey( _directorymappingmanager.getBeanKey(  ) ) != null )
+        // not dublicate
+        if ( DirectoryMappingManagerHome.findByPrimaryKey( _directorymappingmanager.getBeanKey( ) ) != null )
         {
             return true;
         }
@@ -234,10 +230,10 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     }
 
     /**
-     * Manages the removal form of a directorymappingmanager whose identifier is in the http
-     * request
+     * Manages the removal form of a directorymappingmanager whose identifier is in the http request
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the html code to confirm
      */
     @Action( ACTION_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER )
@@ -247,8 +243,8 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
         UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER ) );
         url.addParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER, nId );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request,
-                MESSAGE_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, url.getUrl(  ), AdminMessage.TYPE_CONFIRMATION );
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, url.getUrl( ),
+                AdminMessage.TYPE_CONFIRMATION );
 
         return redirect( request, strMessageUrl );
     }
@@ -256,7 +252,8 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     /**
      * Handles the removal form of a notifygrumappingmanager
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the jsp URL to display the form to manage notifygrumappingmanagers
      */
     @Action( ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER )
@@ -264,7 +261,7 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
         DirectoryMappingManagerHome.remove( nId );
-        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_REMOVED, getLocale(  ) );
+        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_REMOVED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
     }
@@ -272,7 +269,8 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     /**
      * Returns the form to update info about a notifygrumappingmanager
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML form to update info
      */
     @View( VIEW_MODIFY_NOTIFYGRUMAPPINGMANAGER )
@@ -280,42 +278,42 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
 
-        if ( ( _directorymappingmanager == null ) || ( _directorymappingmanager.getId(  ) != nId ) )
+        if ( ( _directorymappingmanager == null ) || ( _directorymappingmanager.getId( ) != nId ) )
         {
             _directorymappingmanager = DirectoryMappingManagerHome.findByPrimaryKey( nId );
         }
 
-        ReferenceList referenceListBean = new ReferenceList(  );
-        ReferenceList listPosition = new ReferenceList(  );
+        ReferenceList referenceListBean = new ReferenceList( );
+        ReferenceList listPosition = new ReferenceList( );
 
         if ( _directorymappingmanager != null )
         {
             String strProviderManagerId = ProviderManagerUtil.fetchProviderManagerId( _directorymappingmanager.getBeanKey( ) );
             String strProviderId = ProviderManagerUtil.fetchProviderId( _directorymappingmanager.getBeanKey( ) );
             AbstractProviderManager providerManager = ProviderManagerUtil.fetchProviderManager( strProviderManagerId );
-            
+
             if ( providerManager != null )
             {
                 referenceListBean.addItem( _directorymappingmanager.getBeanKey( ), providerManager.getProviderDescription( strProviderId ).getLabel( ) );
-                
+
                 listPosition = DirectoryMappingManagerService.getEntryPositions( Integer.parseInt( strProviderId ) );
             }
         }
 
-        Map<String, Object> model = getModel(  );
+        Map<String, Object> model = getModel( );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _directorymappingmanager );
 
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean );
         model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, listPosition );
 
-        return getPage( PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_MODIFY_NOTIFYGRUMAPPINGMANAGER,
-            model );
+        return getPage( PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_MODIFY_NOTIFYGRUMAPPINGMANAGER, model );
     }
 
     /**
      * Process the change form of a notifygrumappingmanager
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The Jsp URL of the process result
      */
     @Action( ACTION_MODIFY_NOTIFYGRUMAPPINGMANAGER )
@@ -326,12 +324,11 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
         // Check constraints
         if ( !validateBean( _directorymappingmanager, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            return redirect( request, VIEW_MODIFY_NOTIFYGRUMAPPINGMANAGER, PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER,
-                _directorymappingmanager.getId(  ) );
+            return redirect( request, VIEW_MODIFY_NOTIFYGRUMAPPINGMANAGER, PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER, _directorymappingmanager.getId( ) );
         }
 
         DirectoryMappingManagerHome.update( _directorymappingmanager );
-        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_UPDATED, getLocale(  ) );
+        addInfo( INFO_NOTIFYGRUMAPPINGMANAGER_UPDATED, getLocale( ) );
 
         return redirectView( request, VIEW_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
     }

@@ -39,7 +39,6 @@ import java.io.Serializable;
 
 import javax.validation.constraints.*;
 
-
 /**
  * This is the business class for the object DirectoryMappingManager
  */
@@ -47,7 +46,7 @@ public class DirectoryMappingManager implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
     @NotEmpty( message = "#i18n{module.directory.mappingmanager.validation.notifygrumappingmanager.BeanKey.notEmpty}" )
     @Size( max = 255, message = "#i18n{module.directory.mappingmanager.validation.notifygrumappingmanager.BeanKey.size}" )
@@ -61,16 +60,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
-    public int getId(  )
+    public int getId( )
     {
         return _nId;
     }
 
     /**
      * Sets the Id
-     * @param nId The Id
+     * 
+     * @param nId
+     *            The Id
      */
     public void setId( int nId )
     {
@@ -79,16 +81,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the BeanKey
+     * 
      * @return The BeanKey
      */
-    public String getBeanKey(  )
+    public String getBeanKey( )
     {
         return _strBeanKey;
     }
 
     /**
      * Sets the BeanKey
-     * @param strBeanKey The BeanKey
+     * 
+     * @param strBeanKey
+     *            The BeanKey
      */
     public void setBeanKey( String strBeanKey )
     {
@@ -97,16 +102,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the ReferenceDemand
+     * 
      * @return The ReferenceDemand
      */
-    public int getReferenceDemand(  )
+    public int getReferenceDemand( )
     {
         return _nReferenceDemand;
     }
 
     /**
      * Sets the ReferenceDemand
-     * @param strGuid The ReferenceDemand
+     * 
+     * @param strGuid
+     *            The ReferenceDemand
      */
     public void setReferenceDemand( int nReferenceDemand )
     {
@@ -115,16 +123,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the Guid
+     * 
      * @return The Guid
      */
-    public int getGuid(  )
+    public int getGuid( )
     {
         return _nGuid;
     }
 
     /**
      * Sets the Guid
-     * @param strGuid The Guid
+     * 
+     * @param strGuid
+     *            The Guid
      */
     public void setGuid( int nGuid )
     {
@@ -133,16 +144,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the CustomerId
+     * 
      * @return The CustomerId
      */
-    public int getCustomerId(  )
+    public int getCustomerId( )
     {
         return _nCustomerId;
     }
 
     /**
      * Sets the CustomerId
-     * @param nCustomerId The CustomerId
+     * 
+     * @param nCustomerId
+     *            The CustomerId
      */
     public void setCustomerId( int nCustomerId )
     {
@@ -151,16 +165,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the MobilePhoneNumber
+     * 
      * @return The MobilePhoneNumber
      */
-    public int getMobilePhoneNumber(  )
+    public int getMobilePhoneNumber( )
     {
         return _nMobilePhoneNumber;
     }
 
     /**
      * Sets the MobilePhoneNumber
-     * @param nMobilePhoneNumber The MobilePhoneNumber
+     * 
+     * @param nMobilePhoneNumber
+     *            The MobilePhoneNumber
      */
     public void setMobilePhoneNumber( int nMobilePhoneNumber )
     {
@@ -169,16 +186,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the FixedPhoneNumber
+     * 
      * @return The FixedPhoneNumber
      */
-    public int getFixedPhoneNumber(  )
+    public int getFixedPhoneNumber( )
     {
         return _nFixedPhoneNumber;
     }
 
     /**
      * Sets the FixedPhoneNumber
-     * @param nFixedPhoneNumber The FixedPhoneNumber
+     * 
+     * @param nFixedPhoneNumber
+     *            The FixedPhoneNumber
      */
     public void setFixedPhoneNumber( int nFixedPhoneNumber )
     {
@@ -187,16 +207,19 @@ public class DirectoryMappingManager implements Serializable
 
     /**
      * Returns the Email
+     * 
      * @return The Email
      */
-    public int getEmail(  )
+    public int getEmail( )
     {
         return _nEmail;
     }
 
     /**
      * Sets the Email
-     * @param nEmail The Email
+     * 
+     * @param nEmail
+     *            The Email
      */
     public void setEmail( int nEmail )
     {

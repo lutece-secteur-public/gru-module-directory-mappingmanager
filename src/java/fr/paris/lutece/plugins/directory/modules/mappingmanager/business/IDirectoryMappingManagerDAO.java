@@ -37,7 +37,6 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.List;
 
-
 /**
  * IDirectoryMappingManagerDAO Interface
  */
@@ -45,46 +44,62 @@ public interface IDirectoryMappingManagerDAO
 {
     /**
      * Insert a new record in the table.
-     * @param directoryMappingManager instance of the DirectoryMappingManager object to insert
-     * @param plugin the Plugin
+     * 
+     * @param directoryMappingManager
+     *            instance of the DirectoryMappingManager object to insert
+     * @param plugin
+     *            the Plugin
      */
     void insert( DirectoryMappingManager directoryMappingManager, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param directoryMappingManager the reference of the DirectoryMappingManager
-     * @param plugin the Plugin
+     * 
+     * @param directoryMappingManager
+     *            the reference of the DirectoryMappingManager
+     * @param plugin
+     *            the Plugin
      */
     void store( DirectoryMappingManager directoryMappingManager, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the DirectoryMappingManager to delete
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the DirectoryMappingManager to delete
+     * @param plugin
+     *            the Plugin
      */
     void delete( int nKey, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the DirectoryMappingManager
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the DirectoryMappingManager
+     * @param plugin
+     *            the Plugin
      * @return The instance of the DirectoryMappingManager
      */
     DirectoryMappingManager load( int nKey, Plugin plugin );
 
     /**
      * Load the data of all the DirectoryMappingManager objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the DirectoryMappingManager objects
      */
     List<DirectoryMappingManager> selectDirectoryMappingManagersList( Plugin plugin );
 
     /**
      * Load the id of all the DirectoryMappingManager objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the id of all the DirectoryMappingManager objects
      */
     List<Integer> selectIdDirectoryMappingManagersList( Plugin plugin );
@@ -92,8 +107,10 @@ public interface IDirectoryMappingManagerDAO
     /**
      * Load.
      *
-     * @param strKey the str key
-     * @param plugin the plugin
+     * @param strKey
+     *            the str key
+     * @param plugin
+     *            the plugin
      * @return the directory mapping manager
      */
     DirectoryMappingManager load( String strKey, Plugin plugin );
