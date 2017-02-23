@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,8 @@ import fr.paris.lutece.plugins.directory.modules.mappingmanager.business.Directo
 import fr.paris.lutece.plugins.directory.modules.mappingmanager.business.DirectoryMappingManagerHome;
 import fr.paris.lutece.plugins.directory.modules.mappingmanager.service.DirectoryMappingManagerService;
 import fr.paris.lutece.plugins.directory.modules.mappingmanager.web.rs.Constants;
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.AbstractServiceProvider;
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.ServiceConfigTaskForm;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.AbstractProviderManager;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.ProviderManagerUtil;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.util.AppLogService;
@@ -46,7 +46,6 @@ import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
-import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.url.UrlItem;
 
@@ -62,6 +61,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller( controllerJsp = "DirectoryMappingManagers.jsp", controllerPath = "jsp/admin/plugins/directory/modules/mappingmanager/", right = "DIRECTORYMAPPINGMANAGER_MANAGEMENT" )
 public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanagerJspBean
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     ////////////////////////////////////////////////////////////////////////////
     // Constants
 
@@ -149,7 +152,7 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _directorymappingmanager );
-        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, DirectoryMappingManagerService.getListProvider(  ) );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, DirectoryMappingManagerService.getListProviders(  ) );
 
         UrlItem url = new UrlItem( AppPathService.getBaseUrl( request ) );
 
@@ -282,36 +285,27 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
             _directorymappingmanager = DirectoryMappingManagerHome.findByPrimaryKey( nId );
         }
 
-        ReferenceList refenreceListBean = new ReferenceList(  );
+        ReferenceList referenceListBean = new ReferenceList(  );
         ReferenceList listPosition = new ReferenceList(  );
 
-        if ( ( _directorymappingmanager != null ) &&
-                ServiceConfigTaskForm.isBeanExists( _directorymappingmanager.getBeanKey(  ) ) )
+        if ( _directorymappingmanager != null )
         {
-            AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCustomizedBean( _directorymappingmanager.getBeanKey(  ) );
-
-            if ( ( _notifyGruService != null ) && _notifyGruService.isManagerProvider(  ) )
+            String strProviderManagerId = ProviderManagerUtil.fetchProviderManagerId( _directorymappingmanager.getBeanKey( ) );
+            String strProviderId = ProviderManagerUtil.fetchProviderId( _directorymappingmanager.getBeanKey( ) );
+            AbstractProviderManager providerManager = ProviderManagerUtil.fetchProviderManager( strProviderManagerId );
+            
+            if ( providerManager != null )
             {
-                ReferenceList rListInstance = _notifyGruService.buildReferenteListProvider(  );
-
-                for ( ReferenceItem provider : rListInstance )
-                {
-                    AppLogService.debug( "\n\n\n\n\n\n  provider.getCode() = " + provider.getCode(  ) +
-                        "    _notifygrumappingmanager.getBeanKey() = " + _directorymappingmanager.getBeanKey(  ) );
-
-                    if ( provider.getCode(  ).equals( _directorymappingmanager.getBeanKey(  ) ) )
-                    {
-                        refenreceListBean.add( provider );
-                        listPosition = DirectoryMappingManagerService.getListEntryOfProvider( provider.getCode(  ) );
-                    }
-                }
+                referenceListBean.addItem( _directorymappingmanager.getBeanKey( ), providerManager.getProviderDescription( strProviderId ).getLabel( ) );
+                
+                listPosition = DirectoryMappingManagerService.getEntryPositions( Integer.parseInt( strProviderId ) );
             }
         }
 
         Map<String, Object> model = getModel(  );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _directorymappingmanager );
 
-        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, refenreceListBean );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean );
         model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, listPosition );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_MODIFY_NOTIFYGRUMAPPINGMANAGER,

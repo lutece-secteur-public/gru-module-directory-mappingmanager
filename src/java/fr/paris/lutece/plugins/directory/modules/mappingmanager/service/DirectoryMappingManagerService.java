@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2016, Mairie de Paris
+ * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,117 +34,66 @@
 package fr.paris.lutece.plugins.directory.modules.mappingmanager.service;
 
 import fr.paris.lutece.plugins.directory.business.IEntry;
-import fr.paris.lutece.plugins.directory.service.DirectoryPlugin;
-import fr.paris.lutece.plugins.directory.utils.DirectoryUtils;
-import fr.paris.lutece.plugins.notifygru.modules.directory.NotifyGruDirectoryManager;
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.AbstractServiceProvider;
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.ServiceConfigTaskForm;
-import fr.paris.lutece.portal.service.admin.AdminUserService;
-import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.plugin.PluginService;
+import fr.paris.lutece.plugins.notifygru.modules.directory.services.INotifyGruDirectoryService;
+import fr.paris.lutece.plugins.notifygru.modules.directory.services.NotifyGruDirectoryConstants;
+import fr.paris.lutece.plugins.notifygru.modules.directory.services.provider.DirectoryProviderManager;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.ProviderDescription;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.ProviderManagerUtil;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 
+import java.util.Collection;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 public class DirectoryMappingManagerService
 {
     private static String PARAM_MAPING_NONE = "Aucun";
+    
+    private static INotifyGruDirectoryService _notifyGruDirectoryService = SpringContextService.getBean( NotifyGruDirectoryConstants.BEAN_SERVICE_PROVIDER_DIRECTORY );
 
-    /** The _str key. */
-    private static String STRING_KEY = "notifygru-directory.ProviderService.@.";
-
-    public static ReferenceList getListProvider(  )
+    public static ReferenceList getListProviders(  )
     {
-        ReferenceList refenreceList = new ReferenceList(  );
+        ReferenceList referenceList = new ReferenceList( );
+        List<DirectoryProviderManager> listProviderManagers = SpringContextService.getBeansOfType( DirectoryProviderManager.class );
 
-        for ( NotifyGruDirectoryManager provider : SpringContextService.getBeansOfType( NotifyGruDirectoryManager.class ) )
+        for ( DirectoryProviderManager providerManager : listProviderManagers )
         {
-            if ( provider.isManagerProvider(  ) )
-            {
-                provider.updateListProvider(  );
+            Collection<ProviderDescription> collectionProviderDescriptions = providerManager.getAllProviderDescriptions( );
 
-                refenreceList.addAll( provider.buildReferenteListProvider(  ) );
+            for ( ProviderDescription providerDescription : collectionProviderDescriptions )
+            {
+                referenceList.addItem( ProviderManagerUtil.buildCompleteProviderId( providerManager.getId( ), providerDescription.getId( ) ),
+                        providerDescription.getLabel( ) );
             }
         }
 
-        return refenreceList;
-    }
-
-    public static ReferenceList getListEntryOfProvider( String strKey )
-    {
-        ReferenceList refenreceList = new ReferenceList(  );
-        refenreceList.addItem( 0, PARAM_MAPING_NONE );
-
-        if ( ServiceConfigTaskForm.isBeanExists( strKey ) )
-        {
-            AbstractServiceProvider provider = ServiceConfigTaskForm.getCustomizedBean( strKey );
-            refenreceList.addAll( ( (NotifyGruDirectoryManager) provider ).getReferenteListEntityProvider(  ) );
-        }
-
-        return refenreceList;
+        return referenceList;
     }
 
     /**
-      * Method to get directory entries list
-      * @param nIdDirectory id directory
-      * @param request request
-      * @return ReferenceList entries list
-      */
-    public static ReferenceList getListEntries( String strKey, HttpServletRequest request )
+     * Gives a {@code ReferenceList} object containing the list of entries for the specified directory.
+     * The code of the {@code ReferenceItem} corresponds to the position of the entry.
+     * The name of the {@code ReferenceItem} corresponds to the title of the entry.    
+     * @param nIdDirectory the directory id
+     * @return the {@code ReferenceList} object
+     */
+    public static ReferenceList getEntryPositions( int nIdDirectory )
     {
-        int nIdDirectory = Integer.parseInt( strKey.split( STRING_KEY )[1] );
+        ReferenceList referenceList = new ReferenceList(  );
+        referenceList.addItem( 0, PARAM_MAPING_NONE );
+        
+        List<IEntry> listRecordField = _notifyGruDirectoryService.getEntries( nIdDirectory );
 
-        if ( nIdDirectory != -1 )
+        for ( IEntry entry : listRecordField )
         {
-            Plugin pluginDirectory = PluginService.getPlugin( DirectoryPlugin.PLUGIN_NAME );
-            List<IEntry> listEntries = DirectoryUtils.getFormEntries( nIdDirectory, pluginDirectory,
-                    AdminUserService.getAdminUser( request ) );
-            ReferenceList referenceList = new ReferenceList(  );
-
-            for ( IEntry entry : listEntries )
-            {
-                if ( entry.getEntryType(  ).getComment(  ) )
-                {
-                    continue;
-                }
-
-                if ( entry.getEntryType(  ).getGroup(  ) )
-                {
-                    if ( entry.getChildren(  ) != null )
-                    {
-                        for ( IEntry child : entry.getChildren(  ) )
-                        {
-                            if ( child.getEntryType(  ).getComment(  ) )
-                            {
-                                continue;
-                            }
-
-                            ReferenceItem referenceItem = new ReferenceItem(  );
-                            referenceItem.setCode( String.valueOf( child.getPosition(  ) ) );
-                            referenceItem.setName( child.getTitle(  ) );
-                            referenceList.add( referenceItem );
-                        }
-                    }
-                }
-                else
-                {
-                    ReferenceItem referenceItem = new ReferenceItem(  );
-                    referenceItem.setCode( String.valueOf( entry.getPosition(  ) ) );
-                    referenceItem.setName( entry.getTitle(  ) );
-                    referenceList.add( referenceItem );
-                }
-            }
-
-            return referenceList;
+            ReferenceItem referenceItem = new ReferenceItem(  );
+            referenceItem.setCode( String.valueOf( entry.getPosition(  ) ) );
+            referenceItem.setName( entry.getTitle(  ) );
+            referenceList.add( referenceItem );
         }
-        else
-        {
-            return new ReferenceList(  );
-        }
+
+        return referenceList;
     }
 }
