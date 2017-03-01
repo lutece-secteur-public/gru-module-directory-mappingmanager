@@ -46,12 +46,12 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
 {
     // Constants
     private static final String SQL_QUERY_NEW_PK = "SELECT max( id_mappingmanager ) FROM directory_mapping_manager";
-    private static final String SQL_QUERY_SELECT = "SELECT id_mappingmanager, beanKey, guid, reference_demand,customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager WHERE id_mappingmanager = ?";
-    private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_mappingmanager, beanKey, guid, reference_demand, customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager WHERE beanKey = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO directory_mapping_manager ( id_mappingmanager, beanKey, guid, reference_demand, customer_id, mobilePhoneNumber, fixedPhoneNumber, email ) VALUES (?, ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_mappingmanager, beanKey, guid, reference_demand, demand_type_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager WHERE id_mappingmanager = ?";
+    private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_mappingmanager, beanKey, guid, reference_demand, demand_type_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager WHERE beanKey = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO directory_mapping_manager ( id_mappingmanager, beanKey, guid, reference_demand, demand_type_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM directory_mapping_manager WHERE id_mappingmanager = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE directory_mapping_manager SET id_mappingmanager = ?, beanKey = ?, guid = ?, reference_demand = ?,customer_id = ?, mobilePhoneNumber = ?, fixedPhoneNumber = ?, email = ? WHERE id_mappingmanager = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_mappingmanager, beanKey, guid, reference_demand, customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager";
+    private static final String SQL_QUERY_UPDATE = "UPDATE directory_mapping_manager SET id_mappingmanager = ?, beanKey = ?, guid = ?, reference_demand = ?, demand_type_id = ?, customer_id = ?, mobilePhoneNumber = ?, fixedPhoneNumber = ?, email = ? WHERE id_mappingmanager = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_mappingmanager, beanKey, guid, reference_demand, demand_type_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email FROM directory_mapping_manager";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_mappingmanager FROM directory_mapping_manager";
 
     /**
@@ -94,6 +94,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
         daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandTypeId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
@@ -124,6 +125,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
 
             notifygruMappingManager.setGuid( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setReferenceDemand( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setDemandTypeId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
 
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
@@ -156,6 +158,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
             notifygruMappingManager.setGuid( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setReferenceDemand( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setDemandTypeId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
@@ -192,6 +195,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
         daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getGuid( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getReferenceDemand( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandTypeId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
@@ -220,7 +224,7 @@ public final class DirectoryMappingManagerDAO implements IDirectoryMappingManage
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
             notifygruMappingManager.setGuid( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setReferenceDemand( daoUtil.getInt( nIndex++ ) );
-
+            notifygruMappingManager.setDemandTypeId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );

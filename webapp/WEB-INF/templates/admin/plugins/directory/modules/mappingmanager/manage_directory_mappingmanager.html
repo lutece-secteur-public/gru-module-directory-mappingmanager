@@ -16,13 +16,15 @@
     <@boxBody>    
     <@messages infos=infos />
     <@paginationAdmin paginator=paginator combo=1 />
+	<div class="clearfix"></div>
     
     <@table>
         <tr>
             <input type="hidden" id="id" name="id"/>
             <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnBeanKey}</th>
             <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnGuid}</th>
-            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnReferenceDemand}</th>   
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnReferenceDemand}</th>
+            <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnDemandType}</th>               
             <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnCuid}</th>
             <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnMobilePhoneNumber}</th>
             <th>#i18n{module.directory.mappingmanager.manage_notifygrumappingmanagers.columnFixedPhoneNumber}</th>
@@ -41,6 +43,9 @@
             </td>
             <td>
                 ${notifygrumappingmanager.referenceDemand!}
+            </td>
+            <td>
+                ${notifygrumappingmanager.demandTypeId!}
             </td>
             <td>
                 ${notifygrumappingmanager.customerId!}
