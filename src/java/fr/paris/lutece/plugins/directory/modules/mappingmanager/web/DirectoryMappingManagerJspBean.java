@@ -81,6 +81,7 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
     private static final String PARAMS_REQUEST_GUID = "guid";
     private static final String PARAMS_REQUEST_CUID = "cuid";
     private static final String PARAMS_REQUEST_REFERENCE_DEMAND = "referencedemand";
+    private static final String PARAMS_REQUEST_DEMAND_TYPE_ID = "demandTypeId";
 
     // Properties for page titles
     private static final String PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "mappingmanager.manage_notifygrumappingmanagers.pageTitle";
@@ -216,6 +217,8 @@ public class DirectoryMappingManagerJspBean extends ManageDirectoryMappingmanage
         _directorymappingmanager.setGuid( Integer.parseInt( request.getParameter( PARAMS_REQUEST_GUID ) ) );
         _directorymappingmanager.setReferenceDemand( Integer.parseInt( request.getParameter( PARAMS_REQUEST_REFERENCE_DEMAND ) ) );
         _directorymappingmanager.setCustomerId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_CUID ) ) );
+        _directorymappingmanager.setDemandTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMAND_TYPE_ID ) ) );
+
     }
 
     private Boolean exitMapping( )

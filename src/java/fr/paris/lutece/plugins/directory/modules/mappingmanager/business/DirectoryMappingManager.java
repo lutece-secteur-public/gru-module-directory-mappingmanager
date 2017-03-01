@@ -57,6 +57,7 @@ public class DirectoryMappingManager implements Serializable
     private int _nMobilePhoneNumber;
     private int _nFixedPhoneNumber;
     private int _nEmail;
+	private int _nDemandTypeId;
 
     /**
      * Returns the Id
@@ -224,5 +225,26 @@ public class DirectoryMappingManager implements Serializable
     public void setEmail( int nEmail )
     {
         _nEmail = nEmail;
+    }
+
+    /**
+     * Returns the DemandTypeId
+     * 
+     * @return The DemandTypeId
+     */   
+	public int getDemandTypeId( )
+	{
+		return _nDemandTypeId;
+	}
+	
+    /**
+     * Sets the DemandTypeId
+     * 
+     * @param nDemandTypeId
+     *            The DemandTypeId
+     */
+    public void setDemandTypeId( int nDemandTypeId )
+    {
+    	_nDemandTypeId = nDemandTypeId;
     }
 }

@@ -23,6 +23,10 @@
 <@comboSiteWithParams name="referencedemand"   default_value="${mappingmanager.referenceDemand!}"   additionalParameters='id="referencedemand"'  items=list_position    />
 </@fieldInputWrapper>
 
+<@fieldInputText i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelDemandType" 
+                        i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelDemandType.help"
+                        inputName="demandTypeId"   mandatory=true   value="${mappingmanager.demandTypeId!}"  cssClass='form-control'/>                        
+
 
 <@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid" 
                         i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid.help"
