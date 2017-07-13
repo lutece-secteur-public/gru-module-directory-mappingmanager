@@ -15,12 +15,12 @@
 <@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelGuid" 
                         i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelGuid.help"
                         inputName="guid"   mandatory=true   value=""  cssClass='form-control'>                        
-<@comboSiteWithParams name="guid"   default_value="${mappingmanager.guid!}"   additionalParameters='id="guid"'  items=list_position    />
+<@comboWithParameters name="guid"   default_value="${mappingmanager.guid!}"   additionalParameters='id="guid"'  items=list_position    />
 </@fieldInputWrapper>
 <@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelReferenceDemand" 
                         i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelReferenceDemand.help"
                         inputName="referencedemand"   mandatory=true   value=""  cssClass='form-control'>                        
-<@comboSiteWithParams name="referencedemand"   default_value="${mappingmanager.referenceDemand!}"   additionalParameters='id="referencedemand"'  items=list_position    />
+<@comboWithParameters name="referencedemand"   default_value="${mappingmanager.referenceDemand!}"   additionalParameters='id="referencedemand"'  items=list_position    />
 </@fieldInputWrapper>
 
 <@fieldInputText i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelDemandType" 
@@ -31,14 +31,14 @@
 <@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid" 
                         i18nHelpBlockKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelCuid.help"
                         inputName="cuid"   mandatory=true   value="0"  cssClass='form-control'>                        
-<@comboSiteWithParams name="cuid"   default_value="${mappingmanager.customerId!}"   additionalParameters='id="cuid"'  items=list_position    />
+<@comboWithParameters name="cuid"   default_value="${mappingmanager.customerId!}"   additionalParameters='id="cuid"'  items=list_position    />
 </@fieldInputWrapper>
 
           
 <@fieldInputWrapper i18nLabelKey="module.directory.mappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" 
                         i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber.help"
                         inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>                        
-<@comboSiteWithParams name="mobilephonenumber"   default_value="${mappingmanager.mobilePhoneNumber!}"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+<@comboWithParameters name="mobilephonenumber"   default_value="${mappingmanager.mobilePhoneNumber!}"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
 </@fieldInputWrapper>
 
 
@@ -49,7 +49,7 @@
                         i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help"
                         inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="fixedphonenumber"   default_value="${mappingmanager.fixedPhoneNumber!}"   additionalParameters='id="fixedphonenumber"'  items=list_position    />
+<@comboWithParameters name="fixedphonenumber"   default_value="${mappingmanager.fixedPhoneNumber!}"   additionalParameters='id="fixedphonenumber"'  items=list_position    />
 </@fieldInputWrapper>
 
 
@@ -60,7 +60,7 @@
                         i18nHelpBlockKey ="module.directory.mappingmanager.modify_notifygrumappingmanager.labelEmail.help"
                         inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="email"   default_value="${mappingmanager.email!}"   additionalParameters='id="email"'  items=list_position    />
+<@comboWithParameters name="email"   default_value="${mappingmanager.email!}"   additionalParameters='id="email"'  items=list_position    />
 </@fieldInputWrapper>
   
       
@@ -69,3 +69,15 @@
         <@actionButtons button1Name="action_modifyNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
     </form>
 </@rowBoxHeader>
+
+<#macro comboWithParameters name default_value additionalParameters items >
+	<select id="${name}" name="${name}" ${additionalParameters} >
+		<#list items as item>
+			<#if default_value="${item.code}">
+				<option selected="selected" value="${item.code}" >${item.name!}</option>
+		   	<#else>
+		   		<option value="${item.code}" ><#if item.name??>${item.name!}<#else>Commentaire</#if></option>
+		   	</#if>
+		</#list>
+	</select>
+</#macro>
